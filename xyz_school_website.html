@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>XYZ Public School</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
+<style>
+:root{
+  --navy:#0a1f44;--blue:#1a5276;--accent:#1a73e8;
+  --gold:#f4c430;--light:#f4f6fb;--white:#fff;
+  --text:#1e2a3a;--muted:#5f6b7c;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Segoe UI',sans-serif;color:var(--text);background:var(--white);}
+
+/* ── TOP BAR ── */
+.topbar{background:var(--navy);color:#cdd8e8;font-size:.82rem;padding:7px 60px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;}
+.topbar span{display:flex;align-items:center;gap:6px;}
+.topbar i{color:var(--gold);}
+
+/* ── NAV ── */
+nav{background:var(--white);position:sticky;top:0;z-index:999;box-shadow:0 2px 16px rgba(0,0,0,.1);}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;padding:10px 60px;}
+.brand{display:flex;align-items:center;gap:14px;text-decoration:none;}
+.brand-logo{width:56px;height:56px;background:linear-gradient(135deg,var(--navy),var(--accent));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.6rem;color:var(--gold);font-weight:900;flex-shrink:0;}
+.brand-text h1{font-size:1.15rem;color:var(--navy);font-weight:800;line-height:1.2;}
+.brand-text p{font-size:.72rem;color:var(--muted);letter-spacing:.5px;}
+.nav-links{display:flex;gap:4px;list-style:none;}
+.nav-links a{display:block;padding:8px 14px;border-radius:8px;color:var(--text);text-decoration:none;font-size:.88rem;font-weight:600;transition:all .2s;}
+.nav-links a:hover,.nav-links a.active{background:var(--navy);color:var(--gold);}
+.nav-admit{background:var(--gold)!important;color:var(--navy)!important;border-radius:8px;}
+.nav-admit:hover{background:#e6b800!important;}
+
+/* ── HERO ── */
+.hero{min-height:92vh;background:linear-gradient(135deg,var(--navy) 0%,#1a3a6e 55%,#1a5276 100%);display:flex;align-items:center;justify-content:center;text-align:center;padding:80px 20px 60px;position:relative;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;opacity:.04;background-image:repeating-linear-gradient(0deg,transparent,transparent 40px,#fff 40px,#fff 41px),repeating-linear-gradient(90deg,transparent,transparent 40px,#fff 40px,#fff 41px);}
+.hero-content{position:relative;z-index:1;}
+.hero-badge{display:inline-block;background:rgba(244,196,48,.15);border:1px solid rgba(244,196,48,.4);color:var(--gold);font-size:.8rem;letter-spacing:2px;text-transform:uppercase;padding:6px 20px;border-radius:50px;margin-bottom:24px;}
+.hero h2{font-size:3.4rem;color:#fff;font-weight:900;line-height:1.15;margin-bottom:16px;}
+.hero h2 span{color:var(--gold);}
+.hero p{color:#b2c4d8;font-size:1.1rem;max-width:580px;margin:0 auto 36px;line-height:1.9;}
+.hero-stats{display:flex;gap:40px;justify-content:center;flex-wrap:wrap;margin-bottom:40px;}
+.stat{text-align:center;}
+.stat strong{display:block;font-size:2rem;color:var(--gold);font-weight:800;}
+.stat span{color:#8faabf;font-size:.82rem;text-transform:uppercase;letter-spacing:1px;}
+.hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+.btn{padding:13px 32px;border-radius:50px;font-size:.95rem;font-weight:700;text-decoration:none;transition:all .3s;display:inline-block;}
+.btn-gold{background:var(--gold);color:var(--navy);}
+.btn-gold:hover{background:#e6b800;transform:translateY(-2px);box-shadow:0 8px 24px rgba(244,196,48,.35);}
+.btn-ghost{border:2px solid rgba(255,255,255,.35);color:#fff;}
+.btn-ghost:hover{background:rgba(255,255,255,.1);transform:translateY(-2px);}
+
+/* ── SECTION SHARED ── */
+section{padding:88px 60px;}
+.sec-label{text-align:center;margin-bottom:56px;}
+.sec-label .tag{display:inline-block;background:rgba(26,115,232,.1);color:var(--accent);font-size:.75rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:4px 16px;border-radius:50px;margin-bottom:12px;}
+.sec-label h2{font-size:2.1rem;color:var(--navy);font-weight:800;}
+.sec-label p{color:var(--muted);margin-top:8px;}
+.sec-label .bar{width:52px;height:4px;background:var(--gold);border-radius:2px;margin:12px auto 0;}
+
+/* ── NOTICE TICKER ── */
+.ticker{background:var(--gold);padding:10px 60px;display:flex;align-items:center;gap:16px;overflow:hidden;}
+.ticker-label{background:var(--navy);color:var(--gold);font-size:.8rem;font-weight:800;padding:4px 14px;border-radius:4px;white-space:nowrap;letter-spacing:1px;}
+.ticker-wrap{overflow:hidden;flex:1;}
+.ticker-inner{display:flex;gap:60px;animation:scroll 28s linear infinite;width:max-content;}
+.ticker-inner span{white-space:nowrap;font-size:.88rem;font-weight:600;color:var(--navy);}
+.ticker-inner span i{margin-right:6px;}
+@keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ── ABOUT ── */
+.about{background:var(--light);}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;max-width:1100px;margin:0 auto;}
+.about-img{background:linear-gradient(135deg,var(--navy),var(--accent));border-radius:24px;height:380px;display:flex;align-items:center;justify-content:center;font-size:7rem;box-shadow:0 16px 48px rgba(10,31,68,.25);position:relative;}
+.about-img .badge-float{position:absolute;bottom:-18px;right:-18px;background:var(--gold);color:var(--navy);font-weight:800;font-size:.85rem;padding:14px 20px;border-radius:14px;box-shadow:0 6px 20px rgba(0,0,0,.15);text-align:center;}
+.about-text h3{font-size:1.7rem;color:var(--navy);font-weight:800;margin-bottom:14px;}
+.about-text p{color:var(--muted);line-height:1.9;margin-bottom:14px;}
+.vm-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px;}
+.vm-card{background:var(--white);border-radius:12px;padding:20px;border-left:4px solid var(--accent);box-shadow:0 2px 12px rgba(0,0,0,.06);}
+.vm-card h4{color:var(--navy);margin-bottom:6px;font-size:.95rem;}
+.vm-card p{color:var(--muted);font-size:.85rem;line-height:1.6;}
+
+/* ── ACADEMICS ── */
+.acad-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px;max-width:1100px;margin:0 auto;}
+.acad-card{background:var(--white);border-radius:18px;padding:32px 28px;box-shadow:0 4px 20px rgba(0,0,0,.07);text-align:center;transition:transform .3s,box-shadow .3s;border-top:4px solid var(--accent);}
+.acad-card:hover{transform:translateY(-8px);box-shadow:0 12px 36px rgba(0,0,0,.12);}
+.acad-icon{font-size:2.8rem;margin-bottom:16px;}
+.acad-card h3{color:var(--navy);font-size:1.05rem;margin-bottom:8px;}
+.acad-card p{color:var(--muted);font-size:.87rem;line-height:1.7;}
+.acad-card .subjects{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:14px;}
+.sub-tag{background:var(--light);color:var(--blue);font-size:.75rem;padding:3px 10px;border-radius:50px;font-weight:600;}
+
+/* ── FACILITIES ── */
+.fac-bg{background:var(--navy);}
+.fac-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;max-width:1100px;margin:0 auto;}
+.fac-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:28px 20px;text-align:center;transition:background .3s,transform .3s;}
+.fac-card:hover{background:rgba(255,255,255,.12);transform:translateY(-4px);}
+.fac-card i{font-size:2.2rem;color:var(--gold);margin-bottom:14px;}
+.fac-card h4{color:#fff;font-size:.97rem;margin-bottom:6px;}
+.fac-card p{color:#8faabf;font-size:.82rem;line-height:1.6;}
+.fac-bg .sec-label h2{color:#fff;}
+.fac-bg .sec-label p{color:#8faabf;}
+.fac-bg .sec-label .tag{background:rgba(244,196,48,.15);color:var(--gold);}
+
+/* ── NOTICES ── */
+.notices-bg{background:var(--light);}
+.notices-grid{display:grid;grid-template-columns:2fr 1fr;gap:32px;max-width:1100px;margin:0 auto;}
+.notice-list{background:var(--white);border-radius:18px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.07);}
+.notice-head{background:var(--navy);color:var(--gold);padding:18px 28px;font-weight:700;font-size:1rem;display:flex;align-items:center;gap:10px;}
+.notice-item{padding:18px 28px;border-bottom:1px solid #f0f2f5;display:flex;gap:16px;align-items:flex-start;transition:background .2s;}
+.notice-item:hover{background:var(--light);}
+.notice-item:last-child{border:none;}
+.notice-date{background:var(--navy);color:var(--gold);border-radius:10px;padding:8px 12px;text-align:center;min-width:52px;flex-shrink:0;}
+.notice-date strong{display:block;font-size:1.3rem;line-height:1;}
+.notice-date span{font-size:.65rem;text-transform:uppercase;letter-spacing:.5px;}
+.notice-content h4{color:var(--navy);font-size:.95rem;margin-bottom:4px;}
+.notice-content p{color:var(--muted);font-size:.83rem;line-height:1.6;}
+.notice-badge{display:inline-block;font-size:.7rem;font-weight:700;padding:2px 10px;border-radius:50px;margin-top:6px;}
+.nb-exam{background:#fff3cd;color:#856404;}
+.nb-event{background:#d1ecf1;color:#0c5460;}
+.nb-holiday{background:#d4edda;color:#155724;}
+.nb-admit{background:#f8d7da;color:#721c24;}
+
+.events-box{background:var(--white);border-radius:18px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.07);}
+.events-head{background:var(--accent);color:#fff;padding:18px 24px;font-weight:700;display:flex;align-items:center;gap:10px;}
+.event-item{padding:16px 24px;border-bottom:1px solid #f0f2f5;display:flex;gap:12px;align-items:center;}
+.event-item:last-child{border:none;}
+.event-dot{width:10px;height:10px;border-radius:50%;background:var(--gold);flex-shrink:0;}
+.event-item p{color:var(--text);font-size:.87rem;line-height:1.5;}
+.event-item span{color:var(--muted);font-size:.77rem;}
+
+/* ── GALLERY ── */
+.gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:auto auto;gap:16px;max-width:1100px;margin:0 auto;}
+.gal-item{border-radius:14px;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:3rem;transition:transform .3s;cursor:pointer;}
+.gal-item:hover{transform:scale(1.03);}
+.gal-item.big{grid-column:span 2;grid-row:span 2;min-height:280px;}
+.gal-item.reg{min-height:130px;}
+.g1{background:linear-gradient(135deg,#667eea,#764ba2);}
+.g2{background:linear-gradient(135deg,#11998e,#38ef7d);}
+.g3{background:linear-gradient(135deg,#f7971e,#ffd200);}
+.g4{background:linear-gradient(135deg,#e96c75,#ee4540);}
+.g5{background:linear-gradient(135deg,#4776e6,#8e54e9);}
+.g6{background:linear-gradient(135deg,#11998e,#2193b0);}
+
+/* ── ADMISSIONS ── */
+.admit-bg{background:var(--light);}
+.admit-inner{max-width:1100px;margin:0 auto;}
+.admit-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px;margin-bottom:48px;}
+.step-card{background:var(--white);border-radius:16px;padding:28px 22px;text-align:center;box-shadow:0 4px 16px rgba(0,0,0,.07);position:relative;}
+.step-num{width:44px;height:44px;background:var(--navy);color:var(--gold);border-radius:50%;font-weight:800;font-size:1.1rem;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;}
+.step-card h4{color:var(--navy);margin-bottom:6px;}
+.step-card p{color:var(--muted);font-size:.85rem;line-height:1.6;}
+.admit-cta{background:linear-gradient(135deg,var(--navy),var(--blue));border-radius:20px;padding:48px;text-align:center;color:#fff;}
+.admit-cta h3{font-size:1.8rem;font-weight:800;margin-bottom:10px;}
+.admit-cta p{color:#b2c4d8;margin-bottom:28px;}
+.admit-cta .dates{display:flex;justify-content:center;gap:40px;flex-wrap:wrap;margin-bottom:32px;}
+.admit-cta .date-item strong{display:block;color:var(--gold);font-size:1.1rem;}
+.admit-cta .date-item span{font-size:.8rem;color:#8faabf;}
+
+/* ── CONTACT ── */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;max-width:1100px;margin:0 auto;align-items:start;}
+.contact-info h3{font-size:1.4rem;color:var(--navy);font-weight:800;margin-bottom:20px;}
+.ci-item{display:flex;gap:16px;align-items:flex-start;margin-bottom:24px;}
+.ci-icon{width:46px;height:46px;background:rgba(26,115,232,.1);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.ci-icon i{color:var(--accent);font-size:1.1rem;}
+.ci-item h4{color:var(--navy);font-size:.95rem;margin-bottom:3px;}
+.ci-item p{color:var(--muted);font-size:.87rem;line-height:1.6;}
+.contact-form{background:var(--light);border-radius:20px;padding:36px;}
+.contact-form h3{color:var(--navy);font-weight:800;margin-bottom:24px;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.form-group{margin-bottom:16px;}
+.form-group label{display:block;color:var(--text);font-size:.87rem;font-weight:600;margin-bottom:6px;}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:11px 14px;border:1.5px solid #dde3ef;border-radius:10px;font-size:.9rem;color:var(--text);background:var(--white);outline:none;transition:border .2s;font-family:inherit;}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--accent);}
+.form-group textarea{resize:vertical;min-height:100px;}
+.form-submit{width:100%;padding:13px;background:var(--navy);color:var(--gold);border:none;border-radius:10px;font-size:.95rem;font-weight:700;cursor:pointer;transition:background .2s;}
+.form-submit:hover{background:var(--accent);}
+
+/* ── FOOTER ── */
+footer{background:#060f20;color:#8faabf;padding:60px 60px 24px;}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px;}
+.footer-brand .brand-logo{width:52px;height:52px;margin-bottom:14px;}
+.footer-brand p{font-size:.87rem;line-height:1.8;margin-top:10px;max-width:240px;}
+footer h4{color:#fff;font-size:.95rem;margin-bottom:16px;font-weight:700;}
+footer ul{list-style:none;}
+footer ul li{margin-bottom:10px;}
+footer ul li a{color:#8faabf;text-decoration:none;font-size:.87rem;transition:color .2s;}
+footer ul li a:hover{color:var(--gold);}
+.footer-bottom{border-top:1px solid #1a2a40;padding-top:22px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;font-size:.82rem;}
+.footer-bottom span{color:var(--gold);}
+.social-links{display:flex;gap:12px;}
+.social-links a{width:36px;height:36px;background:rgba(255,255,255,.07);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#8faabf;text-decoration:none;transition:all .2s;}
+.social-links a:hover{background:var(--gold);color:var(--navy);}
+
+@media(max-width:900px){
+  .topbar,.nav-inner,section{padding-left:20px;padding-right:20px;}
+  .ticker{padding:10px 20px;}
+  .about-grid,.notices-grid,.contact-grid,.footer-grid{grid-template-columns:1fr;}
+  .gallery-grid{grid-template-columns:1fr 1fr;}
+  .gal-item.big{grid-column:span 2;}
+  .hero h2{font-size:2.2rem;}
+  .nav-links{display:none;}
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div style="display:flex;gap:24px;flex-wrap:wrap;">
+    <span><i class="fas fa-phone"></i> +91 11 2345 6789</span>
+    <span><i class="fas fa-envelope"></i> info@xyzpublicschool.edu.in</span>
+    <span><i class="fas fa-map-marker-alt"></i> Sector 12, New Delhi – 110001</span>
+  </div>
+  <div style="display:flex;gap:20px;">
+    <span><i class="fas fa-clock"></i> Mon–Sat: 8:00 AM – 3:30 PM</span>
+    <span><i class="fas fa-calendar-alt"></i> Session 2025–26</span>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a class="brand" href="#">
+      <div class="brand-logo">XYZ</div>
+      <div class="brand-text">
+        <h1>XYZ Public School</h1>
+        <p>Affiliated to CBSE · Est. 1992 · New Delhi</p>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#academics">Academics</a></li>
+      <li><a href="#facilities">Facilities</a></li>
+      <li><a href="#notices">Notices</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#admissions" class="nav-admit">Admissions</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-label">📢 LATEST</div>
+  <div class="ticker-wrap">
+    <div class="ticker-inner">
+      <span><i class="fas fa-star"></i> Admissions Open for Session 2026–27 — Apply Now!</span>
+      <span><i class="fas fa-trophy"></i> XYZ PS wins District Science Olympiad 2025 — Congratulations!</span>
+      <span><i class="fas fa-calendar"></i> Annual Sports Day: 20th April 2026 — All parents invited</span>
+      <span><i class="fas fa-book"></i> Class X & XII Board Results: 98.7% Pass Rate — School Record!</span>
+      <span><i class="fas fa-star"></i> Admissions Open for Session 2026–27 — Apply Now!</span>
+      <span><i class="fas fa-trophy"></i> XYZ PS wins District Science Olympiad 2025 — Congratulations!</span>
+      <span><i class="fas fa-calendar"></i> Annual Sports Day: 20th April 2026 — All parents invited</span>
+      <span><i class="fas fa-book"></i> Class X & XII Board Results: 98.7% Pass Rate — School Record!</span>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-badge">🏫 CBSE Affiliated · Est. 1992</div>
+    <h2>Shaping Tomorrow's<br/><span>Leaders Today</span></h2>
+    <p>At XYZ Public School, we nurture young minds with world-class education, holistic development, and values that last a lifetime.</p>
+    <div class="hero-stats">
+      <div class="stat"><strong>4,200+</strong><span>Students</span></div>
+      <div class="stat"><strong>180+</strong><span>Faculty</span></div>
+      <div class="stat"><strong>34</strong><span>Years</span></div>
+      <div class="stat"><strong>98.7%</strong><span>Board Results</span></div>
+    </div>
+    <div class="hero-btns">
+      <a href="#admissions" class="btn btn-gold">Apply for Admission</a>
+      <a href="#about" class="btn btn-ghost">Discover Our School</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="sec-label">
+    <div class="tag">About Us</div>
+    <h2>A Legacy of Excellence</h2>
+    <div class="bar"></div>
+    <p>Three decades of shaping futures with education, values, and vision</p>
+  </div>
+  <div class="about-grid">
+    <div class="about-img">
+      🏫
+      <div class="badge-float">Est. 1992<br/><small style="font-weight:400">34 Years Strong</small></div>
+    </div>
+    <div class="about-text">
+      <h3>Welcome to XYZ Public School</h3>
+      <p>Founded in 1992, XYZ Public School is one of New Delhi's most trusted CBSE-affiliated institutions. Over three decades, we have built a tradition of academic excellence, character development, and community service.</p>
+      <p>Our school provides a nurturing environment from Nursery to Class XII, empowering every student to discover their potential and become responsible, confident global citizens.</p>
+      <div class="vm-grid">
+        <div class="vm-card">
+          <h4>🎯 Our Vision</h4>
+          <p>To be a centre of learning that inspires excellence, creativity, and lifelong curiosity in every student.</p>
+        </div>
+        <div class="vm-card">
+          <h4>🌱 Our Mission</h4>
+          <p>To provide a safe, inclusive, and stimulating environment where every child thrives academically and personally.</p>
+        </div>
+        <div class="vm-card">
+          <h4>🤝 Our Values</h4>
+          <p>Integrity, Respect, Innovation, Compassion, and a commitment to excellence in all endeavours.</p>
+        </div>
+        <div class="vm-card">
+          <h4>🏆 Our Motto</h4>
+          <p><em>"Vidya Amritam Ashnute"</em> — Knowledge is the nectar of immortality.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACADEMICS -->
+<section id="academics">
+  <div class="sec-label">
+    <div class="tag">Academics</div>
+    <h2>Classes & Streams Offered</h2>
+    <div class="bar"></div>
+    <p>Comprehensive CBSE curriculum from Nursery to Class XII</p>
+  </div>
+  <div class="acad-cards">
+    <div class="acad-card">
+      <div class="acad-icon">🌸</div>
+      <h3>Pre-Primary</h3>
+      <p>Nursery, LKG & UKG — Play-based learning to build cognitive and social foundations.</p>
+      <div class="subjects"><span class="sub-tag">Activity</span><span class="sub-tag">Drawing</span><span class="sub-tag">Phonics</span></div>
+    </div>
+    <div class="acad-card">
+      <div class="acad-icon">📖</div>
+      <h3>Primary (I–V)</h3>
+      <p>Strong fundamentals in core subjects with experiential and project-based learning.</p>
+      <div class="subjects"><span class="sub-tag">Maths</span><span class="sub-tag">English</span><span class="sub-tag">EVS</span><span class="sub-tag">Hindi</span></div>
+    </div>
+    <div class="acad-card">
+      <div class="acad-icon">🔬</div>
+      <h3>Middle School (VI–VIII)</h3>
+      <p>Broadened curriculum introducing science, social studies, and computer fundamentals.</p>
+      <div class="subjects"><span class="sub-tag">Science</span><span class="sub-tag">S.St</span><span class="sub-tag">IT</span><span class="sub-tag">Sanskrit</span></div>
+    </div>
+    <div class="acad-card">
+      <div class="acad-icon">📐</div>
+      <h3>Secondary (IX–X)</h3>
+      <p>CBSE Board preparation with focused coaching in all five core subjects.</p>
+      <div class="subjects"><span class="sub-tag">Math</span><span class="sub-tag">Science</span><span class="sub-tag">English</span><span class="sub-tag">S.St</span></div>
+    </div>
+    <div class="acad-card" style="border-top-color:var(--gold);">
+      <div class="acad-icon">🧪</div>
+      <h3>Sr. Secondary — Science</h3>
+      <p>PCM / PCB with expert faculty, well-equipped labs, and JEE/NEET coaching support.</p>
+      <div class="subjects"><span class="sub-tag">Physics</span><span class="sub-tag">Chemistry</span><span class="sub-tag">Bio/Math</span><span class="sub-tag">CS</span></div>
+    </div>
+    <div class="acad-card" style="border-top-color:#11998e;">
+      <div class="acad-icon">📊</div>
+      <h3>Sr. Secondary — Commerce</h3>
+      <p>Commerce stream with Accountancy, Business Studies, and Economics for future entrepreneurs.</p>
+      <div class="subjects"><span class="sub-tag">Accounts</span><span class="sub-tag">BSt</span><span class="sub-tag">Eco</span><span class="sub-tag">Maths</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- FACILITIES -->
+<section class="fac-bg" id="facilities">
+  <div class="sec-label">
+    <div class="tag">Facilities</div>
+    <h2>World-Class Infrastructure</h2>
+    <div class="bar"></div>
+    <p>Modern facilities designed to inspire and enable every student</p>
+  </div>
+  <div class="fac-grid">
+    <div class="fac-card"><i class="fas fa-flask"></i><h4>Science Labs</h4><p>Fully equipped Physics, Chemistry & Biology laboratories.</p></div>
+    <div class="fac-card"><i class="fas fa-laptop-code"></i><h4>Computer Lab</h4><p>100+ computers with high-speed internet and modern software.</p></div>
+    <div class="fac-card"><i class="fas fa-book-open"></i><h4>Library</h4><p>15,000+ books, journals, e-resources and a dedicated reading zone.</p></div>
+    <div class="fac-card"><i class="fas fa-futbol"></i><h4>Sports Ground</h4><p>Cricket, football, basketball, and athletics track facilities.</p></div>
+    <div class="fac-card"><i class="fas fa-paint-brush"></i><h4>Art & Craft Room</h4><p>Creative studios for painting, pottery, and fine arts.</p></div>
+    <div class="fac-card"><i class="fas fa-music"></i><h4>Music & Dance</h4><p>Dedicated rooms for Indian classical, Western music, and dance.</p></div>
+    <div class="fac-card"><i class="fas fa-chalkboard-teacher"></i><h4>Smart Classrooms</h4><p>Digital boards, projectors, and e-learning tools in every class.</p></div>
+    <div class="fac-card"><i class="fas fa-bus"></i><h4>School Transport</h4><p>GPS-tracked, AC buses covering 40+ routes across the city.</p></div>
+    <div class="fac-card"><i class="fas fa-utensils"></i><h4>Cafeteria</h4><p>Hygienic, nutritious meals and snacks prepared fresh daily.</p></div>
+    <div class="fac-card"><i class="fas fa-medkit"></i><h4>Medical Room</h4><p>Full-time nurse and doctor-on-call for student health care.</p></div>
+  </div>
+</section>
+
+<!-- NOTICES -->
+<section class="notices-bg" id="notices">
+  <div class="sec-label">
+    <div class="tag">Notice Board</div>
+    <h2>Latest Announcements</h2>
+    <div class="bar"></div>
+    <p>Stay updated with school news and upcoming events</p>
+  </div>
+  <div class="notices-grid">
+    <div class="notice-list">
+      <div class="notice-head"><i class="fas fa-bullhorn"></i> School Notices</div>
+      <div class="notice-item">
+        <div class="notice-date"><strong>15</strong><span>Apr</span></div>
+        <div class="notice-content">
+          <h4>Class X Pre-Board Examination Schedule</h4>
+          <p>Pre-board examinations for Class X will commence from 15th April 2026. Time tables are available at the school office.</p>
+          <span class="notice-badge nb-exam">Examination</span>
+        </div>
+      </div>
+      <div class="notice-item">
+        <div class="notice-date"><strong>20</strong><span>Apr</span></div>
+        <div class="notice-content">
+          <h4>Annual Sports Day 2026</h4>
+          <p>All parents are cordially invited to the Annual Sports Day on 20th April 2026 at 9:00 AM in the school ground.</p>
+          <span class="notice-badge nb-event">Event</span>
+        </div>
+      </div>
+      <div class="notice-item">
+        <div class="notice-date"><strong>25</strong><span>Apr</span></div>
+        <div class="notice-content">
+          <h4>Summer Vacation Notice</h4>
+          <p>The school will remain closed for summer vacation from 25th April to 20th June 2026. Classes resume 21st June.</p>
+          <span class="notice-badge nb-holiday">Holiday</span>
+        </div>
+      </div>
+      <div class="notice-item">
+        <div class="notice-date"><strong>30</strong><span>Apr</span></div>
+        <div class="notice-content">
+          <h4>Admission Form Deadline — Session 2026–27</h4>
+          <p>Last date to submit admission forms for the academic session 2026–27 is 30th April 2026.</p>
+          <span class="notice-badge nb-admit">Admissions</span>
+        </div>
+      </div>
+    </div>
+    <div class="events-box">
+      <div class="events-head"><i class="fas fa-calendar-check"></i>&nbsp; Upcoming Events</div>
+      <div class="event-item"><div class="event-dot"></div><div><p>Parent-Teacher Meeting (Class IX–X)</p><span>10 April 2026 · 10:00 AM</span></div></div>
+      <div class="event-item"><div class="event-dot"></div><div><p>Inter-School Debate Competition</p><span>12 April 2026 · 9:30 AM</span></div></div>
+      <div class="event-item"><div class="event-dot"></div><div><p>Annual Sports Day</p><span>20 April 2026 · 9:00 AM</span></div></div>
+      <div class="event-item"><div class="event-dot"></div><div><p>Science Exhibition 2026</p><span>2 May 2026 · 10:00 AM</span></div></div>
+      <div class="event-item"><div class="event-dot"></div><div><p>Farewell Ceremony (Class XII)</p><span>8 May 2026 · 11:00 AM</span></div></div>
+      <div class="event-item"><div class="event-dot"></div><div><p>Summer Vacation Begins</p><span>25 April 2026</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="sec-label">
+    <div class="tag">Gallery</div>
+    <h2>Life at XYZ Public School</h2>
+    <div class="bar"></div>
+    <p>Glimpses of our vibrant school community</p>
+  </div>
+  <div class="gallery-grid">
+    <div class="gal-item big g1">🎭</div>
+    <div class="gal-item reg g2">🔬</div>
+    <div class="gal-item reg g3">🏆</div>
+    <div class="gal-item reg g4">🎨</div>
+    <div class="gal-item reg g5">⚽</div>
+    <div class="gal-item big g6">📚</div>
+  </div>
+</section>
+
+<!-- ADMISSIONS -->
+<section class="admit-bg" id="admissions">
+  <div class="sec-label">
+    <div class="tag">Admissions 2026–27</div>
+    <h2>Join the XYZ Family</h2>
+    <div class="bar"></div>
+    <p>Simple steps to secure your child's future with us</p>
+  </div>
+  <div class="admit-inner">
+    <div class="admit-steps">
+      <div class="step-card"><div class="step-num">1</div><h4>Collect Form</h4><p>Download or collect the admission form from the school office or website.</p></div>
+      <div class="step-card"><div class="step-num">2</div><h4>Submit Documents</h4><p>Submit filled form with birth certificate, report card, and passport photos.</p></div>
+      <div class="step-card"><div class="step-num">3</div><h4>Entrance Test</h4><p>Appear for the written entrance test (Class III and above).</p></div>
+      <div class="step-card"><div class="step-num">4</div><h4>Interview</h4><p>Attend a brief interaction with parents and the student.</p></div>
+      <div class="step-card"><div class="step-num">5</div><h4>Confirmation</h4><p>Receive admission letter and complete fee payment to confirm the seat.</p></div>
+    </div>
+    <div class="admit-cta">
+      <h3>Admissions Open for 2026–27</h3>
+      <p>Limited seats available. Apply early to secure your child's place.</p>
+      <div class="dates">
+        <div class="date-item"><strong>1 March 2026</strong><span>Forms Available</span></div>
+        <div class="date-item"><strong>30 April 2026</strong><span>Last Date to Apply</span></div>
+        <div class="date-item"><strong>10 May 2026</strong><span>Entrance Test</span></div>
+        <div class="date-item"><strong>20 May 2026</strong><span>Results Announced</span></div>
+      </div>
+      <a href="#contact" class="btn btn-gold">Apply Now / Contact Us</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="sec-label">
+    <div class="tag">Contact Us</div>
+    <h2>Get In Touch</h2>
+    <div class="bar"></div>
+    <p>We'd love to hear from you — parents, students, and visitors alike</p>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-info">
+      <h3>School Information</h3>
+      <div class="ci-item"><div class="ci-icon"><i class="fas fa-map-marker-alt"></i></div><div><h4>Address</h4><p>12, Knowledge Park, Sector 12,<br/>New Delhi – 110001, India</p></div></div>
+      <div class="ci-item"><div class="ci-icon"><i class="fas fa-phone"></i></div><div><h4>Phone</h4><p>+91 11 2345 6789 (General)<br/>+91 11 2345 6790 (Admissions)</p></div></div>
+      <div class="ci-item"><div class="ci-icon"><i class="fas fa-envelope"></i></div><div><h4>Email</h4><p>info@xyzpublicschool.edu.in<br/>admissions@xyzpublicschool.edu.in</p></div></div>
+      <div class="ci-item"><div class="ci-icon"><i class="fas fa-clock"></i></div><div><h4>Office Hours</h4><p>Monday – Saturday<br/>8:00 AM to 4:00 PM</p></div></div>
+      <div class="ci-item"><div class="ci-icon"><i class="fas fa-graduation-cap"></i></div><div><h4>Affiliation</h4><p>CBSE Affiliation No. 2730145<br/>School Code: 56234</p></div></div>
+    </div>
+    <div class="contact-form">
+      <h3>Send Us a Message</h3>
+      <div class="form-row">
+        <div class="form-group"><label>Full Name</label><input type="text" placeholder="Your full name"/></div>
+        <div class="form-group"><label>Phone Number</label><input type="text" placeholder="+91 XXXXX XXXXX"/></div>
+      </div>
+      <div class="form-group"><label>Email Address</label><input type="email" placeholder="your@email.com"/></div>
+      <div class="form-group"><label>Subject</label>
+        <select>
+          <option>General Inquiry</option>
+          <option>Admission Enquiry</option>
+          <option>Fee Related</option>
+          <option>Transport</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Message</label><textarea placeholder="Write your message here..."></textarea></div>
+      <button class="form-submit">Send Message &nbsp;→</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="brand-logo" style="width:52px;height:52px;background:linear-gradient(135deg,var(--navy),var(--accent));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:var(--gold);font-weight:900;">XYZ</div>
+      <h4 style="margin-top:12px;color:#fff;">XYZ Public School</h4>
+      <p>Nurturing young minds with excellence, values, and vision since 1992. Affiliated to CBSE, New Delhi.</p>
+    </div>
+    <div>
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#academics">Academics</a></li>
+        <li><a href="#facilities">Facilities</a></li>
+        <li><a href="#notices">Notices</a></li>
+        <li><a href="#admissions">Admissions</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Academics</h4>
+      <ul>
+        <li><a href="#">Pre-Primary</a></li>
+        <li><a href="#">Primary (I–V)</a></li>
+        <li><a href="#">Middle School</a></li>
+        <li><a href="#">Secondary (X)</a></li>
+        <li><a href="#">Senior Secondary</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="#">+91 11 2345 6789</a></li>
+        <li><a href="#">info@xyzpublicschool.edu.in</a></li>
+        <li><a href="#">Sector 12, New Delhi</a></li>
+        <li><a href="#">Mon–Sat, 8AM–4PM</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 <span>XYZ Public School</span>. All Rights Reserved.</p>
+    <div class="social-links">
+      <a href="#"><i class="fab fa-facebook-f"></i></a>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-youtube"></i></a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
